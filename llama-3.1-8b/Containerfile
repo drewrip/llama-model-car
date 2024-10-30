@@ -1,0 +1,19 @@
+FROM ubi9-minimal as build
+
+ARG MODEL_ORG="example_model"
+ARG MODEL_NAME="example_model"
+
+ENV HF_USER="hf_user_example"
+ENV HF_TOKEN="hf_token_example"
+
+RUN microdnf -y install git git-lfs python3
+
+RUN echo "MODEL_ORG: $MODEL_ORG, MODEL_NAME: $MODEL_NAME"
+
+# NOTE that the --exclude *.bin is useful in cases where the Model is stored in both .bin and .safetensor format (or other formats)
+# If this is not the case, remove that part.
+RUN git lfs clone https://$HF_USER:$HF_TOKEN@huggingface.co/$MODEL_ORG/$MODEL_NAME --exclude "*.bin"
+
+RUN mkdir /models
+RUN mv $MODEL_NAME/* /models
+

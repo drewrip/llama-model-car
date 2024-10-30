@@ -1,0 +1,7 @@
+apiVersion: shipwright.io/v1beta1
+kind: BuildRun
+metadata:
+  name: llama-car-buildrun
+spec:
+  build:
+    name: llama-car-build

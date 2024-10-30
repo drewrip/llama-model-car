@@ -1,0 +1,33 @@
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: llama-car-build
+spec:
+  source:
+    type: Git
+    git:
+      url: https://github.com/drewrip/modelcars
+    contextDir: llama-3.1-8b
+  strategy:
+    name: buildah
+    kind: ClusterBuildStrategy
+  paramValues:
+  - name: dockerfile
+    value: Containerfile
+  - name: build-args
+    values:
+      - value: MODEL_ORG=meta-llama
+      - value: MODEL_NAME=Llama-3.1-8B
+  env:
+  - name: HF_USER
+    valueFrom:
+      secretKeyRef:
+        name: hf-login
+        key: hf-user
+  - name: HF_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: hf-login
+        key: hf-token
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/modelcars/llama-3.1-8b
