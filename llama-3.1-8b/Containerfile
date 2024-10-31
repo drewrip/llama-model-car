@@ -9,6 +9,7 @@ ENV HF_TOKEN="hf_token_example"
 RUN microdnf -y install git git-lfs python3
 
 RUN echo "MODEL_ORG: $MODEL_ORG, MODEL_NAME: $MODEL_NAME"
+RUN echo "Token hash: $(echo $HF_TOKEN | sha256sum)"
 
 # NOTE that the --exclude *.bin is useful in cases where the Model is stored in both .bin and .safetensor format (or other formats)
 # If this is not the case, remove that part.
