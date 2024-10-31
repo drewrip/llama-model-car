@@ -18,16 +18,13 @@ spec:
     values:
       - value: MODEL_ORG=meta-llama
       - value: MODEL_NAME=Llama-3.1-8B
-  env:
-  - name: HF_USER
-    valueFrom:
-      secretKeyRef:
-        name: hf-login
-        key: hf-user
-  - name: HF_TOKEN
-    valueFrom:
-      secretKeyRef:
-        name: hf-login
-        key: hf-token
+      - secretValue:
+          name: hf-login
+          key: hf-user
+          format: HF_USER=${SECRET_VALUE}
+      - secretValue:
+          name: hf-login
+          key: hf-token
+          format: HF_TOKEN=${SECRET_VALUE}
   output:
     image: image-registry.openshift-image-registry.svc:5000/modelcars/llama-3.1-8b

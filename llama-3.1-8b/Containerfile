@@ -3,8 +3,8 @@ FROM ubi9-minimal as build
 ARG MODEL_ORG="example_model"
 ARG MODEL_NAME="example_model"
 
-ENV HF_USER="hf_user_example"
-ENV HF_TOKEN="hf_token_example"
+ARG HF_USER="hf_user_example"
+ARG HF_TOKEN="hf_token_example"
 
 RUN microdnf -y install git git-lfs python3
 
@@ -15,6 +15,6 @@ RUN echo "Token hash: $(echo $HF_TOKEN | sha256sum)"
 # If this is not the case, remove that part.
 RUN git lfs clone https://$HF_USER:$HF_TOKEN@huggingface.co/$MODEL_ORG/$MODEL_NAME --exclude "*.bin"
 
+FROM ubi9-minimal as models
 RUN mkdir /models
-RUN mv $MODEL_NAME/* /models
-
+COPY --from=build $MODEL_NAME/* /models
