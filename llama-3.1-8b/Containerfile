@@ -12,7 +12,7 @@ RUN echo "MODEL_ORG: $MODEL_ORG, MODEL_NAME: $MODEL_NAME"
 RUN echo "Excluding files: $EXCLUDE_FILES"
 
 RUN huggingface-cli login --token $HF_TOKEN
-RUN set -x; huggingface-cli download $MODEL_ORG/$MODEL_NAME --local-dir model --exclude=$EXCLUDE_FILES
+RUN set -x; huggingface-cli download $MODEL_ORG/$MODEL_NAME --local-dir model --exclude $EXCLUDE_FILES
 
 FROM ubi9-minimal as models
 RUN mkdir /models
