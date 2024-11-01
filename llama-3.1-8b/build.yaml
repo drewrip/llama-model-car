@@ -18,7 +18,7 @@ spec:
     values:
       - value: MODEL_ORG=meta-llama
       - value: MODEL_NAME=Llama-3.1-8B-Instruct
-      - value: EXCLUDE_FILES="original/*"
+      - value: EXCLUDE_FILES="original/"
       - secretValue:
           name: hf-login
           key: hf-token

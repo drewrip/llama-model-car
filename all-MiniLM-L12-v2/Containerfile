@@ -3,7 +3,7 @@ FROM ubi9-minimal as build
 ARG MODEL_ORG
 ARG MODEL_NAME
 ARG HF_TOKEN
-ARG EXCLUDE_FILES=""
+ARG EXCLUDE_FILES=".git/"
 
 RUN microdnf -y install git git-lfs python3 python3-pip
 RUN pip install -U "huggingface_hub[cli]"

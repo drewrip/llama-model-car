@@ -18,9 +18,10 @@ spec:
     values:
       - value: MODEL_ORG=sentence-transformers
       - value: MODEL_NAME=all-MiniLM-L12-v2
+      - value: EXCLUDE_FILES=".git/"
       - secretValue:
           name: hf-login
           key: hf-token
           format: HF_TOKEN=${SECRET_VALUE}
   output:
-    image: image-registry.openshift-image-registry.svc:5000/modelcars/all-MiniLM-L12-v2
+    image: image-registry.openshift-image-registry.svc:5000/modelcars/all-minilm-l12-v2
