@@ -17,14 +17,12 @@ spec:
   - name: build-args
     values:
       - value: MODEL_ORG=meta-llama
-      - value: MODEL_NAME=Llama-3.1-8B
-      - secretValue:
-          name: hf-login
-          key: hf-user
-          format: HF_USER=${SECRET_VALUE}
+      - value: MODEL_NAME=Llama-3.1-8B-Instruct
+      - value: EXCLUDE_FILES="original/*"
       - secretValue:
           name: hf-login
           key: hf-token
           format: HF_TOKEN=${SECRET_VALUE}
   output:
     image: image-registry.openshift-image-registry.svc:5000/modelcars/llama-3.1-8b
+    pushSecret: modelcars-dockercfg-9fbfj
