@@ -12,4 +12,5 @@ RUN echo "HF_TOKEN hash: $(echo $HF_TOKEN | sha256sum)"
 RUN dd if=/dev/zero of=fake_model.bin  bs=1M  count=$MODEL_SIZE
 
 FROM ubi9-minimal as models
-COPY --from=build fake_model.bin fake_model.bin
+RUN mkdir /models
+COPY --from=build fake_model.bin /models/fake_model.bin
