@@ -10,7 +10,7 @@ RUN echo "MODEL_ORG: $MODEL_ORG, MODEL_NAME: $MODEL_NAME"
 RUN echo "HF_TOKEN hash: $(echo $HF_TOKEN | sha256sum)"
 
 RUN mkdir model
-RUN dd if=/dev/zero of=model/fake_model.bin bs=1M count=$MODEL_SIZE oflag=direct
+RUN dd if=/dev/urandom of=model/fake_model.bin bs=1M count=$MODEL_SIZE
 
 FROM ubi9-minimal as models
 RUN mkdir /models
