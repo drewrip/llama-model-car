@@ -19,9 +19,10 @@ spec:
       - value: MODEL_ORG=fake-model
       - value: MODEL_NAME=fake-model
       - value: EXCLUDE_FILES=".git/"
+      - value: MODEL_SIZE=1000
       - secretValue:
           name: hf-login
           key: hf-token
           format: HF_TOKEN=${SECRET_VALUE}
   output:
-    image: image-registry.openshift-image-registry.svc:5000/modelcars/fake-model
+    image: image-registry.openshift-image-registry.svc:5000/modelcars/fake-model:latest
