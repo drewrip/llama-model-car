@@ -1,0 +1,27 @@
+apiVersion: shipwright.io/v1beta1
+kind: Build
+metadata:
+  name: fake-car-build
+spec:
+  source:
+    type: Git
+    git:
+      url: https://github.com/drewrip/modelcars
+    contextDir: fake-model
+  strategy:
+    name: buildah
+    kind: ClusterBuildStrategy
+  paramValues:
+  - name: dockerfile
+    value: Containerfile
+  - name: build-args
+    values:
+      - value: MODEL_ORG=fake-model
+      - value: MODEL_NAME=fake-model
+      - value: EXCLUDE_FILES=".git/"
+      - secretValue:
+          name: hf-login
+          key: hf-token
+          format: HF_TOKEN=${SECRET_VALUE}
+  output:
+    image: image-registry.openshift-image-registry.svc:5000/modelcars/fake-model

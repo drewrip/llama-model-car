@@ -1,0 +1,7 @@
+apiVersion: shipwright.io/v1beta1
+kind: BuildRun
+metadata:
+  name: fake-car-buildrun
+spec:
+  build:
+    name: fake-car-build
